@@ -1,5 +1,17 @@
-def local_matrix(x_loc, y_loc, E, nu, rhof, n_ind, q, d_ind):
-    # здесь вся работа по локальной генерации
-    d1 = E / (2 * (1 - nu ** 2))
-    d2 = E / (4 * (1 + nu))
-    d3 = E * nu / (2 * (1 - nu ** 2))
+from scipy.integrate import dblquad
+
+
+def f1(x_f1, a_f1):
+    return a_f1 * x_f1 ** 2
+
+
+def f2(y_f1, b_f1):
+    return b_f1 * y_f1
+
+
+a = 2
+b = 2
+Integral = dblquad(lambda y, x: f2(y, b) * f1(x, a), 1, 8, lambda y: 0, lambda y: 1)
+# В интеграле запись от внутреннего аргумента к внешнему, а в пределах интегрирования наоборот
+
+print(Integral)
